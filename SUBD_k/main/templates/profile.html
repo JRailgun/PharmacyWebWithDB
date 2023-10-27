@@ -1,0 +1,176 @@
+{% extends 'base.html' %}
+
+{% block title %}Профиль пользователя{% endblock %}
+
+{% block content %}
+<div class="py-4 mb-5 text-center text-white" style="background-color: #0d6efd;">
+      <h2>Профиль пользователя</h2>
+      <p class="lead">Подробная информация о пользователе</p>
+    </div>
+<div class="container">
+  <main>
+    <form class="needs-validation" novalidate="" method="POST" enctype="multipart/form-data" action="editprofile/">
+      {% csrf_token %}
+    <div class="row g-5 justify-content-center mb-5">
+      {% for el in prof %}
+      {% if el.id == user.id %}
+      <div class="col-md-5 col-lg-4 order-md-last">
+        <img class="rounded mx-auto d-block"  src="{{ el.user_photo.url }}">
+      </div>
+      <div class="col-md-5 col-lg-6">
+        <h4 class="mb-3">Данные профиля</h4>
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="Имя" class="form-label">Имя</label>
+              <input type="text" class="form-control" readonly id="Имя" placeholder="" value="{{ el.first_name }}" required="">
+              <div class="invalid-feedback">
+                Valid first name is required.
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <label for="Фамилия" class="form-label">Фамилия</label>
+              <input type="text" class="form-control" readonly id="Фамилия" placeholder="" value="{{ el.last_name }}" required="">
+              <div class="invalid-feedback">
+                Valid last name is required.
+              </div>
+            </div>
+            <div class="col-12">
+              <label for="Отчество" class="form-label">Отчество</label>
+              <input type="text" class="form-control" readonly id="Отчество" placeholder="" value="{{ el.t_name }}" required="">
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+            </div>
+            <div class="col-12">
+              <label for="Имя пользователя" class="form-label">Имя пользователя</label>
+              <div class="input-group has-validation">
+                <input type="text" class="form-control" readonly id="Имя пользователя" placeholder="" value="{{ el.username }}" required="">
+              <div class="invalid-feedback">
+                  Your username is required.
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <label for="Почта" class="form-label">Email</label>
+              <input type="email" class="form-control" readonly id="Почта" value="{{ el.email }}" placeholder="you@mail.ru">
+              <div class="invalid-feedback">
+                Please enter a valid email address for shipping updates.
+              </div>
+            </div>
+            {% if el.adress_id.num_apart == null %}
+            <div class="col-md-6">
+              <label for="Адрес" class="form-label">Адрес</label>
+              <input type="text" name="" class="form-control" readonly id="Адрес" placeholder=""
+              value="{{ el.adress_id.country }}, {{ el.adress_id.city}}, {{ el.adress_id.street}}, {{ el.adress_id.num_house}}">
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+                <a class="w-100 mb-0 mt-3 btn btn-md mb-0 btn-outline-info" href="{% url 'editadress' el.id %}">Изменить адрес</a>
+              <a class="w-100 mb-0 mt-3 btn btn-md mb-0 btn-outline-primary" href="add_adress/">Добавить адрес</a>
+            </div>
+            {% elif el.adress_id.num_apart %}
+            <div class="col-12">
+              <label for="Адрес" class="form-label">Адрес</label>
+              <input type="text" name="" class="form-control" readonly id="Адрес" placeholder=""
+              value="{{ el.adress_id.country }}, {{ el.adress_id.city}}, {{ el.adress_id.street}}, {{ el.adress_id.num_house}}, {{ el.adress_id.num_apart}}">
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+                <a class="w-100 mb-0 mt-3 btn btn-md mb-0 btn-outline-info" href="{% url 'editadress' el.adress_id.id %}">Изменить адрес</a>
+              <a class="w-100 mb-0 mt-3 btn btn-md mb-0 btn-outline-primary" href="add_adress/">Добавить адрес</a>
+            </div>
+            {% elif el.adress_id == null %}
+            <div class="col-12">
+              <label for="Адрес" class="form-label">Адрес</label>
+              <input type="text" name="" class="form-control" readonly id="Адрес" placeholder=""
+              value="">
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+              <div class="row">
+              <div class="col-sm-6">
+                <a class="w-100 mb-0 mt-3 btn btn-md mb-0 btn-outline-info" href="{% url 'editadress' el.adress_id.id %}">Изменить адрес</a>
+              </div>
+              <div class="col-sm-6">
+                <a class="w-100 mb-0 mt-3 btn btn-md mb-0 btn-outline-danger" href="{% url 'deleteadress' el.adress_id.id %}">Удалить адрес</a>
+              </div>
+                </div>
+              <a class="w-100 mb-0 mt-3 btn btn-md mb-0 btn-outline-primary" href="add_adress/">Добавить адрес</a>
+            </div>
+            {% endif %}
+            {% if el.name_company == null %}
+            <div class="col-12">
+              <label for="Название компании" class="form-label">Название компании</label>
+              <input type="text" class="form-control" readonly id="Название компании" placeholder="" value="" required="">
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+            </div>
+            {% else %}
+            <div class="col-12">
+              <label for="Название компании" class="form-label">Название компании</label>
+              <input type="text" class="form-control" readonly id="Название компании" placeholder="" value="{{ el.name_company}}" required="">
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+            </div>
+            {% endif %}
+            {% if el.INN == null %}
+            <div class="col-12">
+              <label for="ИНН" class="form-label">ИНН</label>
+              <input type="text" class="form-control" readonly id="ИНН" placeholder="" value="" required="">
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+            </div>
+            {% else %}
+            <div class="col-12">
+              <label for="ИНН" class="form-label">ИНН</label>
+              <input type="text" class="form-control" readonly id="ИНН" placeholder="" value="{{ el.INN}}" required="">
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+            </div>
+            {% endif %}
+            {% if el.KPP == null %}
+            <div class="col-12">
+              <label for="КПП" class="form-label">КПП</label>
+              <input type="text" class="form-control" readonly id="КПП" placeholder="" value="" required="">
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+            </div>
+            {% else %}
+            <div class="col-12">
+              <label for="КПП" class="form-label">КПП</label>
+              <input type="text" class="form-control" readonly id="КПП" placeholder="" value="{{ el.KPP}}" required="">
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+            </div>
+            {% endif %}
+            <div class="col-12">
+              <label for="Телефон" class="form-label">Телефон</label>
+              <input type="text" class="form-control" readonly id="Телефон" placeholder="" value="{{ el.phone_number }}" required="">
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+            </div>
+            <div class="col-12">
+              <label for="Дата рождения" class="form-label">Дата рождения</label>
+              <input type="text" class="form-control" readonly id="Дата рождения" placeholder="" value="{{ el.date_birth }}" required="">
+              <div class="invalid-feedback">
+                Please enter your shipping address.
+              </div>
+            </div>
+          <hr class="my-4">
+          <a class="w-100 btn btn-lg btn-primary" href="{% url 'editprof' el.id %}">Редактировать</a>
+          </div>
+      </div>
+    </div>
+        </form>
+      {% endif %}
+      {% endfor %}
+  </main>
+</div>
+{% endblock %}

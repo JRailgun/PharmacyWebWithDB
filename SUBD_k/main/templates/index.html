@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}Главная{% endblock %}
+
+{% block content %}
+<div class="pt-1 pb-4 border-bottom shadow-md" style="background-color: rgb(170, 182, 240);">
+    <div class="text-center mt-5 mb-4 text-white">
+        <h2>Наши сотрудники</h2>
+    </div>
+        </div>
+<div class="container">
+    <div class="d-flex flex-wrap justify-content-center justify-content-md-between align-items-center
+   mb-3 mt-4 py-3 border-bottom shadow-sm">
+    <div class="m-auto text-center">
+        {% for el in emp %}
+        {% if el.last_name == 'Кралис' %}
+        <div class="row text-center m-auto justify-content-center justify-content-md-between">
+            <div class="col-lg-6 m-auto">
+                <img src="/media/img/kralis_cut.png" width="300" height="300" class="rounded-circle">
+                <h4 class="fw-normal">{{ el.last_name }} {{ el.first_name }} {{ el.t_name }}</h4>
+                <label class="lead mb-3">Администратор лучшей аптеки</label>
+            </div>
+        </div>
+        <hr>
+        {% endif %}
+        {% endfor %}
+        <div class="row text-center justify-content-center justify-content-md-between">
+                   {% for el in emp %}
+        {% if el.groups.all.0.name == 'Фармацевт' %}
+            <div class="col-lg-4">
+            {% if el.last_name == 'Валикова' %}
+          <img src="/media/img/valik_cut.png" width="250" height="250" class="rounded-circle">
+            {% else %}
+          <img src="{{ el.user_photo.url }}" width="250" height="250" class="rounded-circle">
+            {% endif %}
+            <h4 class="fw-normal">{{ el.last_name }} {{ el.first_name }} {{ el.t_name }}</h4>
+            <label class="lead mb-3">Фармацевт лучшей аптеки, который торгует жизнью</label>
+            </div>
+            {% endif %}
+        {% endfor %}
+        </div>
+    </div>
+        </div>
+</div>
+{% endblock %}

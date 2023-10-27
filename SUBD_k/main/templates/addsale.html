@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Добавление продажи{% endblock %}
+
+{% block content %}
+     <div class="text-center py-5 mb-4 text-white" style="background-color: #0d6efd;">
+        <h2>Добавление продажи</h2>
+    </div>
+<div class="container">
+<div style="left: 50%;margin-left: -130px;position: absolute;width: 400px;margin-top: 2%;">
+<form  action="{% url 'addsale' %}" method="post">
+    {% csrf_token %}
+    <div class="form-error">{{ form.non_field_errors }}</div>
+    <p>{{ form|crispy }}</p>
+    <button class="w-10 btn btn-outline-primary btn-md" type="submit">Добавить продажу</button>
+</form>
+    </div>
+</div>
+{% endblock %}

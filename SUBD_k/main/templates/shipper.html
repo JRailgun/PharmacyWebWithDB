@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Наши поставщики{% endblock %}
+
+{% block content %}
+<div class="py-4 border-bottom shadow-sm text-center mb-4 text-white" style="background-color: rgb(170, 182, 240);">
+      <h1>Поставщики</h1>
+      <p class="lead">Информация о поставщиках</p>
+    </div>
+<div class="container">
+    <div class="row mb-5 text-center">
+         {% for el in shipp %}
+      <div class="col-md-6 themed-grid-col">
+          <div class="text-center mb-5">
+          <img class="rounded mx-auto d-block" src="{{ el.logo_shipper.url }}" width="450" height="auto">
+        <div class="bd-example-snippet">
+        <ul class="list-group list-group-flush mt-2">
+          <label class="lead mb-1">Название поставщика</label>
+          <li class="list-group-item ">{{ el.name_shipper }}</li>
+          <label class="lead mb-1">Адрес поставщика</label>
+          <li class="list-group-item ">{{ el.adress_id }}</li>
+          <label class="lead mt-3 mb-1">ИНН</label>
+          <li class="list-group-item ">{{ el.INN }}</li>
+          <label class="lead mt-3 mb-1">КПП</label>
+          <li class="list-group-item ">{{ el.KPP }}</li>
+          <label class="lead mt-3 mb-1">Телефон</label>
+          <li class="list-group-item">{{ el.shipper_phone }}</li>
+        </ul>
+        </div>
+      </div>
+      </div>
+     {% endfor %}
+</div>
+</div>
+{% endblock %}

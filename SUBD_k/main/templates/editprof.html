@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Редактирование профиля{% endblock %}
+
+{% block content %}
+<div class="text-center mb-5 py-4 text-white" style="background-color: #17a2b8;">
+        <h2>Редактирование профиля</h2>
+         <p class="lead">Внесите необходимые изменения и сохраните их</p>
+     </div>
+    <div class="container">
+        <div class="m-auto">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="justify-content-md-between mb-2 justify-content-center">
+            {{ form.adress_id|as_crispy_field }}
+                <hr>
+                <div class="row">
+                    <div class="col-md-auto mb-0">
+                        <div  class="row mb-4">
+                            <h4>ФИО</h4>
+                            <div class="col-md-3 mb-0">
+                                {{ form.first_name|as_crispy_field }}
+                            </div>
+                            <div class="col-md-3 mb-0">
+                                {{ form.last_name|as_crispy_field }}
+                            </div>
+                            <div class="col-md-4 mb-0">
+                                {{ form.t_name|as_crispy_field }}
+                            </div>
+                        </div>
+                        <hr width="620">
+                        <h4>Данные почты и имени пользователя</h4>
+                        <div class="row mb-4">
+                            <div class="col-md-3 mb-0">
+                                {{ form.username|as_crispy_field }}
+                            </div>
+                            <div class="col-md-4 mb-0">
+                                {{ form.email|as_crispy_field }}
+                            </div>
+                        </div>
+                        <hr width="620">
+                        <h4>Телефон и дата рождения</h4>
+                        <div class="row mb-4">
+                            <div class="col-md-3 mb-0">
+                                {{ form.phone_number|as_crispy_field }}
+                            </div>
+                            <div class="col-md-3 mb-0">
+                                {{ form.date_birth|as_crispy_field }}
+                            </div>
+                        </div>
+                        <hr width="620">
+                        <h4>Ваша фотография</h4>
+                        <div class="row mb-4">
+                            <div class="col-md-auto mb-0">
+                                {{ form.user_photo|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mb-0">
+                        <h4>Информация о компании</h4>
+                        <div class="row mb-4">
+                            <div class="col-md-6 mb-0">
+                                {{ form.name_company|as_crispy_field }}
+                            </div>
+                            <div class="col-md-6 mb-0">
+                                {{ form.INN|as_crispy_field }}
+                            </div>
+                        <div class="row mb-4">
+                            <div class="col-md-2 mb-0">
+                                {{ form.KPP|as_crispy_field }}
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            <button class="w-100 mt-1 mb-5 btn btn-outline-info btn-lg" type="submit">Сохранить изменения</button>
+            </div>
+        </form>
+        </div>
+    </div>
+{% endblock content %}

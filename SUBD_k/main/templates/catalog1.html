@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block title %}Каталог лекарств{% endblock %}
+
+{% block content %}
+<div class="py-4 border-bottom shadow-md text-center pt-4 mb-4 text-white" style="background-color: rgb(170, 182, 240);">
+      <h1>Каталог лекарств</h1>
+      <p class="lead mb-2">Ниже представлены все лекарства</p>
+    </div>
+<div class="container">
+    <div class="row mb-5 justify-content-center justify-content-md-between text-center">
+        {% for el in med %}
+  <div class="col-auto themed-grid-col d-flex justify-content-center">
+      <div class="text-left m-auto mb-0">
+          <div class="d-flex image-holder">
+              <figure class="image-box">
+          <img class="rounded m-auto d-block" src="{{ el.med_photo.url }}" width="500" height="auto">
+                  </figure>
+          </div>
+           <div class="bd-example-snippet">
+              <ul class="list-group list-group-flush mt-2">
+               <label class="lead mb-2">Название</label>
+                 <li class="list-group-item ">{{ el.name_med }}</li>
+                 <label class="lead mb-2">Группа</label>
+                  <li class="list-group-item ">{{ el.med_group_id }}</li>
+                  <label class="lead mb-2">Производитель</label>
+               <li class="list-group-item ">
+                  {% if el.creator_id.name_creator == "Грюнмед" %}
+               <a class="text-decoration-none text-dark" href="{% url 'grunmed' %}">"ОАО" {{ el.creator_id }}</a>
+                  {% elif el.creator_id.name_creator == "Шиттер" %}
+               <a class="text-decoration-none text-dark" href="{% url 'shitter' %}">"ОАО" {{ el.creator_id }}</a>
+               {% elif el.creator_id.name_creator == "Гладь" %}
+                  <a class="text-decoration-none text-dark" href="{% url 'glad' %}">"ОАО" {{ el.creator_id }}</a>
+               {% endif %}
+              </li>
+              <label class="lead mb-2">Цена</label>
+             <li class="list-group-item">{{ el.price }} руб.</li>
+             <label class="lead mb-2">Количество в наличии</label>
+             <li class="list-group-item">{{ el.quantity }} шт.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+        </div>
+</div>
+{% endblock %}

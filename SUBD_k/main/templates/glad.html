@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %}Гладь{% endblock %}
+
+{% block content %}
+<div class="container">
+<div class=" text-center mb-4">
+      <h1>Гладь</h1>
+      <p class="lead">Информация о производителе</p>
+    </div>
+    <div class="mb-1 text-center">
+<div class="text-center mb-5">
+          <img class="rounded mx-auto d-block" src="{{ gl.logo_creator.url }}" width="450" height="auto">
+        <div class="bd-example-snippet">
+          <div class="">
+        <ul class="list-group list-group-flush mt-2">
+          <label class="lead mb-1">Адрес производителя</label>
+          <li class="list-group-item ">{{ gl.adress_id }}</li>
+          <label class="lead mt-3 mb-1">ИНН</label>
+          <li class="list-group-item ">{{ gl.INN }}</li>
+          <label class="lead mt-3 mb-1">КПП</label>
+          <li class="list-group-item ">{{ gl.KPP }}</li>
+          <label class="lead mt-3 mb-1">Телефон</label>
+          <li class="list-group-item">{{ gl.creator_phone }}</li>
+        </ul>
+        </div>
+        </div>
+      </div>
+    </div>
+</div>
+{% endblock %}

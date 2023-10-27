@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Добавление адреса{% endblock %}
+
+{% block content %}
+<div class="text-center mb-5 py-4 text-white" style="background-color: #17a2b8;">
+        <h2>Редактирование профиля</h2>
+         <p class="lead">Изменение адреса</p>
+     </div>
+    <div class="container">
+        <div class="m-auto">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="justify-content-md-between mb-2 justify-content-center">
+                <div class="row">
+                    <div class="col-md-auto mb-0">
+                        <div  class="row mb-4">
+                            <div class="col-md-3 mb-0">
+                                {{ form.country|as_crispy_field }}
+                            </div>
+                            <div class="col-md-3 mb-0">
+                                {{ form.city|as_crispy_field }}
+                            </div>
+                            <div class="col-md-4 mb-0">
+                                {{ form.street|as_crispy_field }}
+                            </div>
+                            <div class="col-md-3 mb-0">
+                                {{ form.num_house|as_crispy_field }}
+                            </div>
+                            <div class="col-md-4 mb-0">
+                                {{ form.num_apart|as_crispy_field }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="w-100 mt-1 mb-5 btn btn-outline-info btn-lg" type="submit">Изменить адрес</button>
+        </form>
+        </div>
+    </div>
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}Удаление адреса{% endblock %}
+
+{% block content %}
+    <div class="container">
+     <div class="text-center mb-5 mt-5">
+        <h2>Редактирование профиля</h2>
+         <p class="lead">Удаление адреса</p>
+     </div>
+        <div class="text-center">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="text-center">
+                <div class="row">
+                    <div class="col-md-auto mb-0">
+                        <h4>Вы уверены, что хотите удалить адрес {{ form_as.p|crispy }}?</h4>
+                    </div>
+                </div>
+            </div>
+            <button class="w-25 mt-1 mb-3 btn btn-outline-danger btn-md" type="submit">Да</button>
+        </form>
+          <a href="{% url 'profile' %}"><button class="w-25 btn btn-outline-primary">Нет</button></a>
+        </div>
+    </div>
+{% endblock content %}

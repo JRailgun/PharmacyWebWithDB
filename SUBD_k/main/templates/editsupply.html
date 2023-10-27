@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Изменение поставки{% endblock %}
+
+{% block content %}
+     <div class="text-center py-5 mb-4 text-white" style="background-color: #17a2b8;">
+        <h2>Изменение поставки</h2>
+    </div>
+    <div class="container">
+        <div style="left: 50%;margin-left: -150px;position: absolute;width: 400px;margin-top: 2%;">
+        <form method="POST">
+            {% csrf_token %}
+            <p>{{ form|crispy }}</p>
+            <button class="w-10 btn btn-outline-info btn-md" type="submit">Обновить</button>
+        </form>
+        </div>
+    </div>
+{% endblock content %}
